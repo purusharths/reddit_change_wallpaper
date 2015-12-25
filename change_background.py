@@ -10,11 +10,12 @@ class apply_background():
 		self.apply()
 
 	def apply(self):
-		drive = "C:\\"
-		folder = "Users\Azazel\Desktop\IOTD"
+		path = os.getcwd()
+		drive = path[:3]
+		folder = path[3:]
+		
 		image = self.image_name
 		image_path = os.path.join(drive, folder, image)
 		SPI_SETDESKWALLPAPER = 20 
 		ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 3)
-		print "Done :)"
-
+		print "."
