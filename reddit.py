@@ -16,7 +16,7 @@ def calling(subreddit):
 		print search_string
 		#https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}
 		#[htps:/]{7,8}[a-zA-Z0-9./:.]+[a-zA-Z0-9./:.]
-		photo_url = str(re.search('[htps:/]{7,8}[a-zA-Z0-9._/:.]+[a-zA-Z0-9./:.]', search_string).group())
+		photo_url = str(re.search('[htps:/]{7,8}[a-zA-Z0-9._/:.]+[a-zA-Z0-9./:.-]+', search_string).group())
 		print search_string+"\n\n\n\n"
 		if photo_url[-4:]!=".jpg":
 			photo_url = photo_url+".jpg"
