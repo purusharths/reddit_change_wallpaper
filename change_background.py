@@ -19,3 +19,18 @@ class apply_background():
 		SPI_SETDESKWALLPAPER = 20 
 		ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 3)
 		print "."
+
+class apply_background_linux():
+	def __init__(self, name):
+		print "..."
+		self.apply(name)
+	
+	def apply(self, name):
+		cwd = os.getcwd()
+		wallpaper_name = '"{}"'.format(name)
+		cwd = 'file://'+cwd+"/"+wallpaper_name
+		print cwd
+		os.system("gsettings set org.gnome.desktop.background picture-uri "+cwd)
+
+
+#os.system("gsettings set org.gnome.desktop.background picture-uri "+path)
