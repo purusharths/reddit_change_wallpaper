@@ -6,7 +6,7 @@ import platform
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
-
+import imgur_album as album
 platform = platform.system()
 print platform
 try:
@@ -19,7 +19,6 @@ except:
 
 head = {'User-Agent': 'Mozilla/5.0'}
 
-
 def image_check(image):
 	im=Image.open(image)
 	is_image = im.size
@@ -28,7 +27,6 @@ def image_check(image):
 		return True
 	else:
 		return False
-
 
 def calling(subreddit):
 	r = requests.get("https://www.reddit.com/r/"+subreddit, headers = head)
@@ -42,14 +40,20 @@ def calling(subreddit):
 		#https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}
 		#[htps:/]{7,8}[a-zA-Z0-9./:.]+[a-zA-Z0-9./:.]
 		photo_url = str(re.search('[htps:/]{7,8}[a-zA-Z0-9._/:.]+[a-zA-Z0-9./:.-]+', search_string).group())
+		is_album = re.findall('[htps:/]+imgur.com/a/[a-zA-Z0-9./]+', photo_url)
+		if is_album:
+			print "Imgur album found"
+			photo_name = album.get_album_photos(photo_url)
+
 		if photo_url[-4:]!=".jpg":
 			print "Redirect suspected."
 			photo_url = photo_url+".jpg"
 		print "URL: {}".format(photo_url)
 		
 		photo_name = re.findall(r'(>)([\w\s,().{}\[\]]+)(<?)',search_string)
-		print "List: {}".format(photo_name)
 		photo_name = photo_name[0][1]+".jpg"
+		
+		print "List: {}".format(photo_name)
 		urllib.urlretrieve(photo_url, photo_name)
 		print "Name: {}\n".format(photo_name)
 		if image_check(photo_name):
@@ -59,7 +63,7 @@ def calling(subreddit):
 			a = background(photo_name)
 			print "Applied."
 		else:
-			print "A redirect URL found. Image is not downloaded properly."
+			print "Image is not downloaded properly."
 	else:
 		print "Something went wrong!"
 		print r.status_code
