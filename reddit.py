@@ -1,7 +1,8 @@
+import urllib
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
-import urllib
 from change_background import apply_background
 from PIL import Image
 
