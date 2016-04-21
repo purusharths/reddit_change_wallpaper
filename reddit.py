@@ -1,11 +1,24 @@
-import requests
-from bs4 import BeautifulSoup
+#!/usr/bin/env python
 import re
 import urllib
-from change_background import apply_background
+import platform
+
+import requests
+from bs4 import BeautifulSoup
 from PIL import Image
 
+platform = platform.system()
+print platform
+try:
+	if platform.lower() == 'windows':
+		from change_background import apply_background as background
+	if platform.lower() == 'linux':
+		from change_background import apply_background_linux as background
+except:
+	print "Import Error. Unsupported OS"
+
 head = {'User-Agent': 'Mozilla/5.0'}
+
 
 def image_check(image):
 	im=Image.open(image)
@@ -40,7 +53,10 @@ def calling(subreddit):
 		urllib.urlretrieve(photo_url, photo_name)
 		print "Name: {}\n".format(photo_name)
 		if image_check(photo_name):
-			a = apply_background(photo_name)
+			##
+			print "\n\n{}".format(photo_name)
+			##
+			a = background(photo_name)
 			print "Applied."
 		else:
 			print "A redirect URL found. Image is not downloaded properly."
