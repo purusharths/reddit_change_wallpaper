@@ -3,7 +3,7 @@ If you're on windows, before running this execute:<br/>
 `C:\Python27\Scripts\pip.exe install ctypes bs4 PIL`<br/>
 For linux:<br/>
 `sudo pip install bs4 PIL`
-<br/>
+<br/><br/>
 run `reddit.py` <br/>
 <br/>
 By default, if the link to the top wallpaper is of an imgur album, First photo of the album will be downloaded.<br/>
