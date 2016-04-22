@@ -5,8 +5,8 @@ import os
 class apply_background():
 	"""docstring for apply_background"""
 	image_name = ""
-	def __init__(self, todays_date):
-		self.image_name = todays_date
+	def __init__(self, photo_name):
+		self.image_name = photo_name
 		self.apply()
 
 	def apply(self):

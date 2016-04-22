@@ -43,8 +43,8 @@ def calling(subreddit):
 		photo_url = str(re.search('[htps:/]{7,8}[a-zA-Z0-9._/:.]+[a-zA-Z0-9./:.-]+', search_string).group())
 		is_album = re.findall('[htps:/]+imgur.com/a/[a-zA-Z0-9./]+', photo_url)
 		if is_album:
-			print "Imgur album found"
-			photo_name = album.get_album_photos(photo_url)
+			print "Imgur album detected. Downloading first photo of the album..."
+			photo_url = album.get_album_photos(photo_url)
 
 		if photo_url[-4:]!=".jpg":
 			print "Redirect suspected."
