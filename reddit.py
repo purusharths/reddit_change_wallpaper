@@ -16,6 +16,7 @@ try:
 		from change_background import apply_background_linux as background
 except:
 	print "Import Error. Unsupported OS"
+	exit()
 
 head = {'User-Agent': 'Mozilla/5.0'}
 
@@ -50,7 +51,7 @@ def calling(subreddit):
 			photo_url = photo_url+".jpg"
 		print "URL: {}".format(photo_url)
 		
-		photo_name = re.findall(r'(>)([\w\s,().{}\[\]]+)(<?)',search_string)
+		photo_name = re.findall(r"(>)([\w\s,().'{}\[\]]+)(<?)",search_string)
 		photo_name = photo_name[0][1]+".jpg"
 		
 		print "List: {}".format(photo_name)
