@@ -20,6 +20,9 @@ except:
 
 head = {'User-Agent': 'Mozilla/5.0'}
 
+album_argument = open('random_wallpaper.txt', 'r'); RANDOM_ALBUM = int(album_argument.readline()); album_argument.close()
+print RANDOM_ALBUM
+
 def image_check(image):
 	im=Image.open(image)
 	is_image = im.size
@@ -43,9 +46,10 @@ def calling(subreddit):
 		photo_url = str(re.search('[htps:/]{7,8}[a-zA-Z0-9._/:.]+[a-zA-Z0-9./:.-]+', search_string).group())
 		is_album = re.findall('[htps:/]+imgur.com/a/[a-zA-Z0-9./]+', photo_url)
 		if is_album:
-			print "Imgur album detected. Downloading first photo of the album..."
-			photo_url = album.get_album_photos(photo_url)
-
+			if RANDOM_ALBUM == 1: print "Imgur album detected. Downloading a random photo from the album..."
+			else: print "Imgur album detected. Downloading the first photo from the album..."
+			photo_url = album.get_album_photos(photo_url, RANDOM_ALBUM)
+		
 		if photo_url[-4:]!=".jpg":
 			print "Redirect suspected."
 			photo_url = photo_url+".jpg"
