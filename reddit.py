@@ -61,14 +61,18 @@ def calling(subreddit):
 		print "List: {}".format(photo_name)
 		urllib.urlretrieve(photo_url, photo_name)
 		print "Name: {}\n".format(photo_name)
-		if image_check(photo_name):
-			##
-			print "\n\n{}".format(photo_name)
-			##
-			a = background(photo_name)
-			print "Applied."
-		else:
-			print "Image is not downloaded properly."
+		try:
+			if image_check(photo_name):
+				##
+				print "\n\n{}".format(photo_name)
+				##
+				a = background(photo_name)
+				print "Applied."
+			else:
+				print "Image is not downloaded properly."
+		except IOError:
+			print "Image is not downloaded properly or the given domain has restricted bot's access"
+
 	else:
 		print "Something went wrong!"
 		print r.status_code
